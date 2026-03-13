@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<body class="register-body">
+
+
+{% include "Register_header.html" %}
+<div class="page-container">
+    
+    <!-- LEFT SIDE (FORM) -->
+    <div class="form-section">
+
+        <h2 class="register-title">Create Account</h2>
+
+        <form method="post" class="register-form">
+            {% csrf_token %}
+
+            {% for i in form %}
+            <div class="form-group">
+
+                <label class="form-label">
+                    {{ i.label_tag }}
+                </label>
+
+                <div class="form-input">
+                    {{ i }}
+                </div>
+
+                <div class="form-error">
+                    {{ i.errors|striptags }}
+                </div>
+
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="register-btn">
+                Register
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- RIGHT SIDE (IMAGE) -->
+    <div class="image-section">
+
+        <div class="image-overlay">
+            <h1>Welcome</h1>
+            <p>Join our platform and start sharing your ideas.</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
