@@ -1,0 +1,81 @@
+/* Sidebar */
+
+.sidebar{
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background: rgb(37,38,53);
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+/* Menu container */
+
+.sidebar-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Menu item */
+
+.side-item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.side-item:hover{
+    background: rgba(255,255,255,0.15);
+}
+
+/* Icons */
+
+.side-item .material-icons{
+    font-size: 24px;
+}
+
+/* Text */
+
+.text{
+    white-space: nowrap;
+}
+
+/* ================= DESKTOP ================= */
+
+@media screen and (min-width: 651px){
+
+    .sidebar:hover{
+        width: 220px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width: 650px){
+
+    .sidebar{
+        width: 70px;
+    }
+
+    .text{
+        display: none;
+    }
+
+}
+
+/* Highlight active page */
+.side-item.active {
+    background: #667eea; /* or gradient if you prefer */
+    color: white;
+}
+
+.side-item.active .material-icons {
+    color: white;
+}

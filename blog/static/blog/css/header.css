@@ -116,3 +116,14 @@ body {
         content: "close";
     }
 }
+header, .center {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+}
+body {
+    padding-top: 60px; /* same as header height */
+}

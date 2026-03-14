@@ -1,0 +1,149 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+}
+
+/* Main content wrapper next to sidebar */
+.main-content {
+    margin-left: 220px; /* sidebar width */
+    padding: 60px 40px 40px 40px; /* leave space for header & padding */
+    transition: margin-left 0.3s;
+}
+
+/* Editor background shapes */
+.editor-background::before,
+.editor-background::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.editor-background::before {
+    width: 350px;
+    height: 350px;
+    background: #ffecd2;
+    top: 10%;
+    left: 10%;
+}
+
+.editor-background::after {
+    width: 250px;
+    height: 250px;
+    background: #c1f0f6;
+    bottom: 10%;
+    right: 15%;
+}
+
+/* Editor card */
+.editor-container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 35px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease;
+    margin: auto;
+}
+
+/* Title */
+.editor-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #334e68;
+    margin-bottom: 30px;
+}
+
+/* Form layout */
+.post-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+/* Labels */
+.post-form label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #334e68;
+}
+
+/* Inputs */
+.post-form input,
+.post-form select,
+.post-form textarea {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+    transition: 0.3s;
+}
+
+.post-form input:focus,
+.post-form textarea:focus,
+.post-form select:focus {
+    border-color: #7f8fa6;
+    box-shadow: 0 4px 8px rgba(127, 143, 166, 0.2);
+    transform: scale(1.01);
+}
+
+/* Publish button */
+.publish-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.publish-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .editor-container {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 650px) {
+    .main-content {
+        margin-left: 0; /* remove sidebar space for mobile */
+        padding: 100px 20px 20px 20px;
+    }
+}

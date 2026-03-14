@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'blog/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/add_post.css' %}">
+</head>
+<body>
+
+    {% include "blog/header.html" %}
+    {% include "blog/sidebar.html" %}
+
+    <div class="main-content">
+        <div class="editor-background"></div>
+
+        <div class="editor-container">
+            <h1 class="editor-title">Create New Blog Post</h1>
+
+            <form method="POST" enctype="multipart/form-data" class="post-form">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+
+                <button type="reset" class="publish-btn">Reset Form</button>
+                <button type="button" class="publish-btn" onclick="window.history.back()">Back</button>
+                <button type="submit" class="publish-btn">Publish Post</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+
+    <link rel="stylesheet" href="{% static 'blog/css/all_posts.css' %}">
+
+</head>
+
+<body>
+
+
+<div class="header">
+    {% include 'blog/header.html' %}
+</div>
+
+<div class="page-layout">
+
+    <div class="sidebar">
+        {% include 'blog/sidebar.html' %}
+    </div>
+
+   <div class="main-content">
+
+    <h1>All Blogs</h1>
+
+    <div class="posts-container">
+
+        {% for post in posts %}
+        <div class="post-card">
+
+            {% if post.image %}
+            <div class="blogcard-thumbnail-wrapper">
+                <img style="height: 400px; width: 400px;" src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+            {% endif %}
+
+            <div class="post-info">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <span>By {{ post.author.username }} | {{ post.created_at|date:"M d, Y" }}</span>
+                <a href="{% url 'post_detail' post.id %}" class="read-more">Read More</a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+</body>
+</html>
