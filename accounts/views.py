@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import signupform, loginform
-
+from django.contrib.auth.decorators import login_required
 
 # ---------------- REGISTER ---------------- #
 
@@ -16,7 +16,7 @@ def register(request):
     else:
         form = signupform()
 
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'Register.html', {'form': form})
 
 
 # ---------------- LOGIN ---------------- #
@@ -62,3 +62,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def user_profile(request):
+    return render(request, 'User_Profile.html')

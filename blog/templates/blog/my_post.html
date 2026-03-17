@@ -1,27 +1,29 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>My Posts</title>
-    <link rel="stylesheet" href="{% static 'blog/css/all_post.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/my_post.css' %}">
 </head>
 
 <body>
 
 <div id="blog-posts-page">
 
+    <!-- HEADER -->
     <div class="header">
         {% include 'blog/header.html' %}
     </div>
 
     <div class="page-layout">
 
+        <!-- SIDEBAR -->
         <div class="sidebar">
             {% include 'blog/sidebar.html' %}
         </div>
 
+        <!-- MAIN CONTENT -->
         <div class="main-content">
 
             <h1>My Posts</h1>
@@ -34,7 +36,7 @@
 
                     {% if post.image %}
                     <div class="blogcard-thumbnail-wrapper">
-                        <img class="blogcard-thumbnail" src="{{ post.image.url }}" alt="{{ post.title }}">
+                        <img class="blogcard-thumbnail" src="{{ post.image.url }}">
                     </div>
                     {% endif %}
 
@@ -43,12 +45,6 @@
                         <h2>{{ post.title }}</h2>
 
                         <p>{{ post.content|truncatewords:20|safe }}</p>
-
-                        <span>
-                            {{ post.created_at|date:"M d, Y" }}
-                        </span>
-
-                        <br>
 
                         <a href="{% url 'post_detail' post.id %}" class="read-more">
                             Read More

@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/User_Profile.css' %}">
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <!-- Profile Image -->
+    <div class="profile-image">
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="profile">
+        {% else %}
+            <img src="{% static 'blog/images/default.png' %}" alt="default">
+        {% endif %}
+    </div>
+
+    <!-- User Info -->
+    <div class="profile-info">
+        <h2>{{ profile.user.username }}</h2>
+
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+
+        <p><strong>Website:</strong>
+            <a href="{{ profile.website }}">{{ profile.website }}</a>
+        </p>
+
+        <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+
+        <p><strong>Joined:</strong> {{ profile.created_at }}</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -29,6 +29,10 @@
             <span class="text">Add Post</span>
         </a>
 
+         <a href="{% url 'my_posts' %}" class="side-item {% if request.path == '/my-posts/' %}active{% endif %}">
+            <span class="material-icons">create</span>
+            <span class="text">My Posts</span>
+        </a>
     </div>
 </div>
 </body>

@@ -1,26 +1,88 @@
+/* RESET */
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+}
+
+/* PAGE WRAPPER */
+
+#blog-posts-page{
+    width:100%;
+}
+
+/* HEADER */
+
+#blog-posts-page .header{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+/* PAGE LAYOUT */
+
+#blog-posts-page .page-layout{
+    display:flex;
+    margin-top:70px; /* space for header */
+}
+
+/* SIDEBAR */
+
+#blog-posts-page .sidebar{
+    width:220px;
+    height:100vh;
+    position:fixed;
+    top:70px;
+    left:0;
+ 
+    border-right:1px solid #ddd;
+}
+
 /* MAIN CONTENT */
+
 #blog-posts-page .main-content{
     margin-left:220px;
     padding:30px;
+    width:100%;
 }
 
-/* FLEX CONTAINER */
+/* PAGE TITLE */
+
+#blog-posts-page h1{
+    margin-bottom:25px;
+    color:#333;
+}
+
+/* POSTS GRID */
+
 #blog-posts-page .posts-container{
     display:flex;
     flex-wrap:wrap;
     gap:25px;
 }
 
-/* CARD */
+/* POST CARD */
+
 #blog-posts-page .post-card{
     width:300px;
     background:white;
     border-radius:10px;
     overflow:hidden;
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+/* HOVER */
+
+#blog-posts-page .post-card:hover{
+    transform:translateY(-6px);
 }
 
 /* IMAGE WRAPPER */
+
 #blog-posts-page .blogcard-thumbnail-wrapper{
     width:100%;
     height:200px;
@@ -28,27 +90,35 @@
 }
 
 /* IMAGE */
+
 #blog-posts-page .blogcard-thumbnail{
     width:100%;
     height:100%;
     object-fit:cover;
-    display:block;
 }
 
-/* INFO */
+/* POST INFO */
+
 #blog-posts-page .post-info{
     padding:15px;
 }
 
+/* TITLE */
+
 #blog-posts-page .post-info h2{
     font-size:18px;
     margin-bottom:10px;
+    color:#222;
 }
+
+/* TEXT */
 
 #blog-posts-page .post-info p{
     font-size:14px;
     color:#555;
 }
+
+/* DATE */
 
 #blog-posts-page .post-info span{
     font-size:12px;
@@ -56,6 +126,7 @@
 }
 
 /* BUTTON */
+
 #blog-posts-page .read-more{
     display:inline-block;
     margin-top:10px;
@@ -66,8 +137,16 @@
     text-decoration:none;
 }
 
-/* HOVER EFFECT */
-#blog-posts-page .post-card:hover{
-    transform:translateY(-5px);
-    transition:0.3s;
+/* BUTTON HOVER */
+
+#blog-posts-page .read-more:hover{
+    background:#0f78d1;
+}
+
+/* NO POSTS */
+
+.no-posts{
+    font-size:18px;
+    color:gray;
+    margin-top:40px;
 }
