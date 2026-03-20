@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import signupform, loginform
+from .forms import signupform, loginform,ProfileForm
 from django.contrib.auth.decorators import login_required
+from .models import BlogUser
 
 # ---------------- REGISTER ---------------- #
 
 def register(request):
     if request.method == 'POST':
+        
         form = signupform(request.POST)
 
         if form.is_valid():
@@ -43,7 +45,7 @@ def user_login(request):
 
                 login(request, user)
 
-                return redirect('dashboard')
+                return redirect('all_posts')
 
             else:
                 print("AUTH FAILED")
@@ -64,5 +66,40 @@ def user_logout(request):
     return redirect('login')
 
 
+
+@login_required
 def user_profile(request):
-    return render(request, 'User_Profile.html')
+    profile, created = BlogUser.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'User_Profile.html', {
+        'profile': profile,
+        'form': form
+    })
+
+
+
+@login_required
+def edit_profile(request):
+    # Get or create the profile for the logged-in user
+    profile, created = BlogUser.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            # Redirect to the profile page after saving
+            return redirect('profile')  # <-- use the correct URL name from urls.py
+        else:
+            print(form.errors)  # Shows form errors in console
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'Edit_Profile.html', {'form': form})

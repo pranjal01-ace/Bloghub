@@ -17,6 +17,19 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
+    
+    CATEGORY_CHOICES = (
+        ('tech', 'Technology'),
+        ('programming', 'Programming'),
+        ('ai', 'Artificial Intelligence'),
+        ('web', 'Web Development'),
+        ('python', 'Python'),
+        ('news', 'News'),
+        ('tutorial', 'Tutorial'),
+        ('tips', 'Tips & Tricks'),
+        ('career', 'Career'),
+        ('other', 'Other'),
+    )
 
     title = models.CharField(max_length=200)
 
@@ -28,7 +41,11 @@ class Post(models.Model):
 
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
 
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default='other'
+    )
 
     views = models.PositiveIntegerField(default=0)
 
@@ -49,3 +66,20 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    #Like Model
+    
+    # models.py
+from django.db import models
+from django.contrib.auth.models import User
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
+    def __str__(self):
+        return f"{self.user.username} likes {self.post.title}"

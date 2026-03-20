@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Hamburger Menu</title>
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="{% static 'blog/css/header.css' %}">
 
 </head>
+
 <body>
 
     <div class="center">
@@ -31,14 +33,17 @@
 
             <!-- Menu Items -->
             <div class="items">
-                <a href="/auth/home/" class="item">Home</a>
-                <a href="/auth/contact/" class="item">Contact</a>
+                {% include "blog/menu_items.html" %}
                 <a href="/auth/user_profile/" class="item">My Profile</a>
                 <a href="/auth/logout/" class="item">Logout</a>
+                
+                    
+                
             </div>
 
         </div>
     </div>
 
 </body>
+
 </html>

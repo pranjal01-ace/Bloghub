@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>My Posts</title>
     <link rel="stylesheet" href="{% static 'blog/css/all_post.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -24,7 +25,9 @@
 
         <div class="main-content">
 
-            <h1>My Posts</h1>
+            <h1 style="color: black;  text-align: left; padding: 20px; margin: 20px; border-radius: 10px; font-family:cursive; font-size: 40px;">
+    Home
+</h1>
 
             <div class="posts-container">
 
@@ -32,6 +35,7 @@
 
                 <div class="post-card">
 
+                    <!-- Post Image -->
                     {% if post.image %}
                     <div class="blogcard-thumbnail-wrapper">
                         <img class="blogcard-thumbnail" src="{{ post.image.url }}" alt="{{ post.title }}">
@@ -40,28 +44,56 @@
 
                     <div class="post-info">
 
+                        <!-- Post Title / Author -->
                         <h2>{{ post.title }}</h2>
+                        <span>By {{ post.author.username }} | {{ post.created_at|date:"M d, Y" }}</span>
 
-                        <p>{{ post.content|truncatewords:20|safe }}</p>
+                        <!-- Post Content (truncated) -->
+                        <p>{{ post.content|truncatewords:30|safe }}</p>
 
-                        <span>
-                            {{ post.created_at|date:"M d, Y" }}
-                        </span>
+                        <!-- Actions like Instagram -->
+                        <div class="post-actions">
+                            {% if user.is_authenticated %}
+                            <!-- Like -->
+                            <form action="{% url 'like_post' post.id %}" method="post" class="inline-form">
+                                {% csrf_token %}
+                                <button type="submit" class="action-btn {% if post.is_liked %}liked{% else %}not-liked{% endif %}">
+                                    {% if post.is_liked %}
+                                        ❤️
+                                    {% else %}
+                                        🤍
+                                    {% endif %}
+                                </button>
+                            </form>
 
-                        <br>
+                            <!-- Comment (link to post detail for now) -->
+                            <a href="{% url 'post_detail' post.id %}" class="action-btn">💬</a>
 
+                            <!-- Share (just placeholder for now) -->
+                            <button class="action-btn">🔗</button>
+
+                            <!-- Save (placeholder) -->
+                            <button class="action-btn">📌</button>
+                            {% else %}
+                                <span class="like-login">Login to interact</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Likes Count -->
+                        <span class="likes-count">{{ post.likes.count }} {{ post.likes.count|pluralize:"Like,Likes" }}</span>
+
+                        <!-- Read More -->
                         <a href="{% url 'post_detail' post.id %}" class="read-more">
                             Read More
                         </a>
+                        
 
                     </div>
 
                 </div>
 
                 {% empty %}
-
                 <p class="no-posts">You haven't written any posts yet.</p>
-
                 {% endfor %}
 
             </div>

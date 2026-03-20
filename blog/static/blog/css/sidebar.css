@@ -56,26 +56,38 @@
 
 }
 
-/* ================= MOBILE ================= */
 
+/* ================= MOBILE ================= */
 @media screen and (max-width: 650px){
 
     .sidebar{
-        width: 70px;
+        display: none;
     }
-
-    .text{
+    .side-item{
         display: none;
     }
 
 }
 
-/* Highlight active page */
-.side-item.active {
-    background: #667eea; /* or gradient if you prefer */
-    color: white;
-}
+/* ================= MOBILE ================= */
+@media screen and (max-width: 650px){
 
-.side-item.active .material-icons {
-    color: white;
+    /* Completely remove sidebar */
+    .sidebar{
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Remove any sidebar items if somehow outside */
+    .sidebar-menu,
+    .side-item {
+        display: none !important;
+    }
+
+    /* Fix content shifting */
+    .content {
+        margin-left: 0 !important;
+    }
 }

@@ -57,6 +57,23 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.s-item {
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5mm;
+    transition: 0.3s;
+}
+
+.s-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+
+/*sidebar-icons*/
+
+
 /* Hamburger icon (hidden on desktop) */
 .logo label {
     display: none;
@@ -106,10 +123,16 @@ body {
         border-top: 1px solid rgb(52, 53, 71);
         border-radius: 0;
     }
+    .s-item {
+        width: 100%;
+        padding: 15px;
+        border-top: 1px solid rgb(52, 53, 71);
+        border-radius: 0;
+    }
 
     /* When checkbox checked */
     #menu:checked ~ .items {
-        max-height: 300px;
+        max-height: 500px;
     }
 
     #menu:checked ~ .logo label::before {
@@ -126,4 +149,34 @@ header, .center {
 }
 body {
     padding-top: 60px; /* same as header height */
+}
+
+/* ================= DESKTOP ================= */
+@media screen and (min-width: 651px){
+
+    /* Show normal header items */
+    .item {
+        display: inline-flex;
+    }
+
+    /* Hide sidebar items in header */
+    .s-item {
+        display: none;
+    }
+}
+
+
+/* ================= MOBILE ================= */
+@media screen and (max-width: 650px){
+
+    /* Hide normal header items */
+    .item {
+        display: block;
+    }
+
+    /* Show sidebar items in hamburger */
+    .s-item {
+        display: block;
+        width: 100%;
+    }
 }

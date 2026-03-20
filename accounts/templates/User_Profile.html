@@ -9,30 +9,77 @@
 
 <body>
 
-<div class="profile-container">
+<div class="profile-page">
 
-    <!-- Profile Image -->
-    <div class="profile-image">
-        {% if profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" alt="profile">
-        {% else %}
-            <img src="{% static 'blog/images/default.png' %}" alt="default">
-        {% endif %}
-    </div>
+    <!-- HEADER -->
+    <header class="profile-header">
+        {% include 'blog/header.html' %}
+    </header>
 
-    <!-- User Info -->
-    <div class="profile-info">
-        <h2>{{ profile.user.username }}</h2>
+    <div class="profile-layout">
 
-        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <!-- SIDEBAR -->
+        <aside class="profile-sidebar">
+            {% include 'blog/sidebar.html' %}
+        </aside>
 
-        <p><strong>Website:</strong>
-            <a href="{{ profile.website }}">{{ profile.website }}</a>
-        </p>
+        <!-- MAIN CONTENT -->
+        <main class="profile-main">
 
-        <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+            <div class="profile-card">
 
-        <p><strong>Joined:</strong> {{ profile.created_at }}</p>
+                <!-- LEFT: IMAGE -->
+                <div class="profile-left">
+
+                    <div class="profile-image-wrapper">
+                        {% if profile.profile_image %}
+                            <img src="{{ profile.profile_image.url }}" class="profile-image">
+                        {% else %}
+                            <img src="{% static 'blog/images/default.png' %}" class="profile-image">
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: INFO -->
+                <div class="profile-right">
+
+                    <h2 class="profile-username">{{ profile.user.username }}</h2>
+
+                    <div class="profile-info">
+                        <p><span>Role:</span> {{ profile.role }}</p>
+                        <p><span>Bio:</span> {{ profile.bio|default:"No bio yet" }}</p>
+
+                        <p><span>Website:</span>
+                            {% if profile.website %}
+                                <a href="{{ profile.website }}" target="_blank">
+                                    {{ profile.website }}
+                                </a>
+                            {% else %}
+                                Not added
+                            {% endif %}
+                        </p>
+
+                        <p><span>Date of Birth:</span>
+                            {{ profile.date_of_birth|default:"Not set" }}
+                        </p>
+
+                        <p><span>Joined:</span> {{ profile.created_at }}</p>
+                    </div>
+
+                    <!-- EDIT BUTTON -->
+                    <div class="profile-actions">
+                        <a href="/auth/edit_profile/" class="edit-btn">
+                            Edit Profile
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
     </div>
 
 </div>

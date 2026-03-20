@@ -1,0 +1,104 @@
+/* General layout */
+.edit-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Layout inside page */
+.profile-layout {
+    display: flex;
+    margin-top: 20px;
+}
+
+/* Sidebar */
+.profile-sidebar {
+    width: 220px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+/* Main content */
+.profile-main {
+    flex: 1;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+/* Headings */
+.profile-main h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Textarea */
+textarea {
+    min-height: 80px;
+}
+
+/* Image preview */
+#preview {
+    display: block;
+    margin-top: 10px;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+/* Error list */
+.form-errors {
+    background-color: #ffe5e5;
+    border: 1px solid #ff4d4d;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #a70000;
+}
+
+.form-errors ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Button */
+.btn-submit {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #004999;
+}

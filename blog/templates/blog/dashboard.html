@@ -1,3 +1,116 @@
-{% include "blog/header.html" %}
+{% load static %}
 
+{% include "blog/header.html" %}
 {% include "blog/sidebar.html" %}
+
+<link rel="stylesheet" href="{% static 'blog/css/dashboard.css' %}">
+
+<div class="content">
+
+    <!-- STATS -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Posts</h3>
+            <p>{{ total_posts }}</p>
+        </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="chart-box">
+        <canvas id="postChart"></canvas>
+    </div>
+
+    <!-- FILTER -->
+    <form method="GET" class="filter-box">
+        <select name="category">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}">{{ cat.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- POSTS -->
+    <h2>All Posts</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.slug }}</td>
+            <td>{{ post.category }}</td>
+            <td>{{ post.status }}</td>
+            <td>
+                <form method="POST" action="{% url 'delete_post' post.id %}">
+                    {% csrf_token %}
+                    <button class="delete-btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- USERS -->
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if request.user.is_superuser and user != request.user %}
+                <form method="POST" action="{% url 'delete_user' user.id %}">
+                    {% csrf_token %}
+                    <button class="delete-btn">Delete</button>
+                </form>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('postChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{% for cat in categories %}"{{ cat.name }}",{% endfor %}],
+            datasets: [{
+                label: 'Posts per Category',
+                data: [{% for cat in categories %}{{ cat.post_set.count }},{% endfor %}],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
